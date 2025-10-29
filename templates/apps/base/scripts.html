@@ -1,0 +1,88 @@
+{#========== phone number ================#}
+<script>
+    $('#phone-mask').inputmask({
+        "mask": "+\\9\\98(99) 999-99-99"
+    });
+    $('#messages-modal').modal('show');
+</script>
+{#============== regions -districts ============#}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#id_region").change(function () {
+            let region_id = $(this).val();
+            if (region_id) {
+                $.ajax({
+                    url: "{% url 'get_districts' %}",
+                    data: {'region_id': region_id},
+                    dataType: 'json',
+                    success: function (data) {
+                        let citySelect = $("#id_district");
+                        citySelect.empty();
+                        citySelect.append('<option value="">Tumanni tanlang</option>');
+                        $.each(data, function (index, district) {
+                            citySelect.append('<option value="' + district.id + '">' + district.name + '</option>');
+                        });
+                    }
+                });
+            } else {
+                $("#id_description").empty();
+                $("#id_district").empty().append('<option value="">Avval viloyatni tanlang</option>');
+            }
+        });
+    });
+</script>
+
+{#================== wishlist=================#}
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+   document.querySelectorAll(".like-button").forEach(button => {
+       button.addEventListener("click", function () {
+           let productId = this.dataset.productId;
+           let button = this;
+
+           fetch(`/wishlist/${productId}`, {
+               method: "GET"
+           })
+           .then(response => response.json())
+           .then(data => {
+               if (data.liked) {
+                   button.classList.add("bg-danger");  // Like bosilgan boladi
+               } else {
+                   button.classList.remove("bg-danger"); // Unlike bozgaradi
+               }
+           });
+       });
+   });
+});
+</script>
+
+
+{#=================== thread form ================#}
+<script>
+    $('.btn_open_modal').on('click', function () {
+        let product_id = $(this).attr('name');
+        let benefit = $(this).attr('data-bs-sell_price');
+        $('#hidden_product').val(product_id);
+        $('#id_discount').attr("placeholder", "Chegirma miqdori: " + benefit + " so'mgacha");
+    })
+</script>
+
+<script>
+    document.querySelector('.copy_ref_bn').addEventListener('click', function () {
+        // Inputdagi qiymatni olish
+        let textToCopy = document.querySelector('.ref_link').value;
+
+        // Clipboard’ga nusxalash
+        navigator.clipboard.writeText(textToCopy)
+            .then(() => {
+                alert('Havola nusxa qilindi: ' + textToCopy);
+            })
+            .catch(err => {
+                console.error('Nusxa qilishda xato: ', err);
+                alert('Nusxa qilishda xato yuz berdi!');
+            });
+    });
+</script>

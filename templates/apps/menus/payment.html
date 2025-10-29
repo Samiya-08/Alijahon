@@ -1,0 +1,155 @@
+{% extends 'apps/base/include.html' %}
+
+{% block body %}
+    <div class="container">
+        <br>
+        <div class="row">
+            <div class="col-sm-6 p-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Mening hisobim</h5>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Asosiy balansda: {{ request.user.balance }} so'm</h5>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-sm-6 p-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>To'lovga sorov berish formasi</h5>
+                    </div>
+                    <nav>
+                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                            <button id="nav-money-tab" class="nav-link active" data-bs-toggle="tab"
+                                    data-bs-target="#nav-money" type="button" role="tab" aria-controls="nav-money"
+                                    aria-selected="true">Pul
+                            </button>
+{#                            <button class="nav-link" id="nav-coin-tab" data-bs-toggle="tab" data-bs-target="#nav-coin"#}
+{#                                    type="button" role="tab" aria-controls="nav-coin" aria-selected="false">Tanga#}
+{#                            </button>#}
+                        </div>
+                    </nav>
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="nav-money" role="tabpanel" aria-labelledby="nav-money-tab">
+                            <form class="card-body" action="{% url 'payment' %}" method="post">
+                                {% csrf_token %}
+                                {% if messages %}
+                                    {% for message in messages %}
+                                    	<h4 style="color: red">{{ message }}</h4>
+                                    {% endfor %}
+                                    
+                                	
+                                {% endif %} 
+                                       
+                                <div class="form-group">
+                                    Karta raqami <input type="text" name="card_number" class="form-control"
+                                                        placeholder="Karta raqamini kiriting" maxlength="16" required=""
+                                                        id="id_card_number">
+                                </div>
+
+                                <div class="form-group">
+                                    Amount <input type="number" name="amount" class="form-control"
+                                                  placeholder="Miqdorini kiriting" required="" id="id_amount">
+                                    <input type="hidden" name="user_id" value="{{ request.user.pk }}">
+                                </div>
+
+                                <div class="form-group">
+                                    <select name="type" class="form-control class-type" style="display: none;"
+                                            id="id_type">
+                                        <option value="money">Pul</option>
+
+
+
+                                    </select>
+                                </div>
+
+                                <input type="submit" value="Tasdiqlash" class="btn btn-primary">
+                            </form>
+                        </div>
+                        <div class="tab-pane fade" id="nav-coin" role="tabpanel" aria-labelledby="nav-coin-tab">
+                            <form class="card-body" method="post">
+                                <input type="hidden" name="csrfmiddlewaretoken"
+                                       value="sL1GmO8IUMAqgck44plluE9EFDQdgsdl25yx0ExPo9hw2PZgjBEVJ7ufyNC4yKxt">
+                                <div class="form-group">
+                                    Karta raqami <input type="text" name="card_number" class="form-control"
+                                                        placeholder="Karta raqamini kiriting" maxlength="16" required=""
+                                                        id="id_card_number">
+                                </div>
+
+                                <div class="form-group">
+                                    Amount <input type="number" name="amount" class="form-control"
+                                                  placeholder="Miqdorini kiriting" required="" id="id_amount">
+                                </div>
+
+                                <div class="form-group">
+                                    <select name="type" class="form-control class-type" style="display: none;"
+                                            id="id_type">
+                                        <option value="money">Pul</option>
+
+{#                                        <option value="coin">Tanga</option>#}
+
+                                    </select>
+                                </div>
+
+                                <input type="submit" method="POST" value="Tasdiqlash" class="btn btn-primary">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br>
+        <br>
+
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Sana</th>
+                    <th scope="col">Hisob raqam</th>
+                    <th scope="col">Summa</th>
+                    <th scope="col">Holat</th>
+                    <th scope="col">Xabar</th>
+                    <th scope="col">Check</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                {% if not payments %}
+                    <tr class="text-center">
+
+                        <th colspan="5"> Hozircha sizda pul yechish sorovlari mavjud emas</th>
+
+                    </tr>
+                    {% else %}
+                    {% for payment in payments %}
+                        <th>
+                            <th scope="col">{{ payment.payment_at }}</th>
+                            <th scope="col">{{ payment.card_number }}</th>
+                            <th scope="col">{{ payment.amount }}</th>
+                            <th scope="col">{{ payment.status }}</th>
+                            <th scope="col">{{ payment.description }}</th>
+                        {% if payment.check_payment %}
+                            <th>
+                                <a href="{{ payment.check_payment.url }}">
+                                    <img src="{{ payment.check_payment.url }}" alt="" style="width: 60px; height: 60px">
+                                </a>
+                            </th>
+                        {% endif %}
+                            
+                        </tr>
+                    	
+                    {% endfor %}
+                    
+                {% endif %} 
+               
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

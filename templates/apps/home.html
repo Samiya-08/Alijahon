@@ -1,0 +1,113 @@
+{% extends 'apps/base/include.html' %}
+
+{% block body %}
+    <div class="card mt-2 mb-2">
+        <div class="card-header bg-light">
+            <div class="row align-items-center">
+                <div class="col">
+                    <h5 class="mb-0" id="followers"></h5>
+                </div>
+                <div class="col text-end"><a class="font-sans-serif" href="/category">Kategoriyalar</a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body bg-light px-1 py-0">
+            <div class="row g-0 text-center fs--1">
+
+                {% for category in categories %}
+                    <div class="col-4 col-md-4 col-lg-3 col-xx1-2 mb-1">
+                        <div class="bg-white dark__bg-1100 p-1 h-100"><a
+                                href="{% url 'product-list' category.slug %}"><img
+                                class="img-thumbnail img-fluid  mb-3 shadow-sm"
+                                src="{{ category.icon }}" alt=""
+                                width="100"></a>
+                            <h6 class="mb-1"><a
+                                    href="{% url 'product-list' category.slug %}">{{ category.name }}</a>
+                            </h6>
+                            <p class="fs--2 mb-1"></p>
+                        </div>
+                    </div>
+                {% endfor %}
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="mobileShow" style="margin-left: 22px; margin-top: 10px;">
+{#            <div class="search-box" data-list='{"valueNames":["title"]}'>#}
+{#                <form action="/search/" method="POST" class="position-relative" data-bs-toggle="search"#}
+{#                      data-bs-display="static" autocomplete="off">#}
+{#                    <input id="search-input" name="product" class="form-control search-input fuzzy-search"#}
+{#                           type="search"#}
+{#                           placeholder="Search..." aria-label="Search"/>#}
+{#                    <span class="fas fa-search search-box-icon"></span>#}
+{#                </form>#}
+{#                <div class="btn-close-falcon-container position-absolute end-0 top-50 translate-middle shadow-none"#}
+{#                     data-bs-dismiss="search">#}
+{#                    <div class="btn-close-falcon" aria-label="Close"></div>#}
+{#                </div>#}
+{#                <div class="dropdown-menu border font-base start-0 mt-2 py-0 overflow-hidden w-100">#}
+{#                    <div id="search-results-mobile" class="scrollbar list py-3" style="max-height: 24rem;">#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+        </div>
+        <div class="card-body">
+            <div class="row">
+                
+                {% for product in products%}
+                	 <div class="col-6 mb-3 col-md-6 col-lg-4">
+                    <div class="border rounded-1 d-flex flex-column justify-content-between pb-3">
+                        <div class="overflow-hidden">
+                            <div class="position-relative rounded-top overflow-hidden">
+                                <a class="d-block" href="{% url 'product-detail' product.slug %}">
+                                    <img class="img-fluid rounded-top" src="{{product.image.url}}"
+                                         alt=""></a>
+                            </div>
+                            <div class="p-2">
+                                <h5 class="fs-0">
+                                    <a class="text-dark"
+                                       href="{% url 'product-detail' product.slug %}">{{ product.name.title }}</a>
+                                </h5>
+                                <p class="fs--1 mb-2">
+                                    <a class="text-500" href="{% url 'product-list' product.category.slug %}">{{ product.category.name.title}}</a>
+                                </p>
+                                <h5 class="fs-md-2 text-warning mb-0 d-flex align-items-center mb-2"> {{ product.price }}
+                                    <!-- <del class="ms-2 fs--1 text-500">180 000 so'm </del> -->
+                                </h5>
+                            </div>
+                        </div>
+
+                        <div class="d-flex flex-between-center px-3">
+                                        <div>
+                                            <span class="fa fa-star text-warning"></span><span
+                                                class="fa fa-star text-warning"></span><span
+                                                class="fa fa-star text-warning"></span><span
+                                                class="fa fa-star text-warning"></span><span
+                                                class="fa fa-star text-300"></span><span class="ms-1">
+                                                </span>
+                                        </div>
+                                        <div>
+                                            <a class="btn btn-sm btn-falcon-default like-button{% if product.pk in liked_products_id %} bg-danger {% endif %}"
+                                               href="#!" data-bs-toggle="tooltip" data-bs-placement="top"
+                                               data-product-id="{{ product.pk }}" title="Add to Wish List"><span
+                                                    class="far fa-heart "></span></a><a
+                                                class="btn btn-sm btn-falcon-default" href="#!"
+                                                data-bs-toggle="tooltip" data-bs-placement="top"
+                                                title="Add to Cart"><span class="fas fa-cart-plus">
+
+                                            </span>
+                                        </a>
+                                        </div>
+                                    </div>
+
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

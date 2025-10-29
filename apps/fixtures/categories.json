@@ -1,0 +1,115 @@
+[
+  {
+    "model": "apps.Category",
+    "pk": 1,
+    "fields": {
+      "name": "Uy uchun",
+      "icon": "https://img.icons8.com/arcade/40/home.png"
+
+    }
+  },
+  {
+    "model": "apps.Category",
+    "pk": 2,
+    "fields": {
+      "name": "Bolalar uchun",
+      "icon": "https://img.icons8.com/cute-clipart/40/baby.png"
+    }
+  },
+  {
+    "model": "apps.Category",
+    "pk": 3,
+    "fields": {
+      "name": "Sovg'a",
+      "icon": "https://img.icons8.com/external-justicon-flat-justicon/40/external-gift-ecommerce-justicon-flat-justicon.png"
+    }
+  },
+  {
+    "model": "apps.Category",
+    "pk": 4,
+    "fields": {
+      "name": "Ayollar",
+      "icon": "https://img.icons8.com/external-justicon-lineal-color-justicon/40/external-woman-spring-justicon-lineal-color-justicon.png"
+    }
+  },
+  {
+    "model": "apps.Category",
+    "pk": 5,
+    "fields": {
+      "name": "Davolovchi mahsulotlar",
+      "icon": "https://img.icons8.com/external-vitaliy-gorbachev-blue-vitaly-gorbachev/40/external-pills-health-vitaliy-gorbachev-blue-vitaly-gorbachev.png"
+    }
+  },
+  {
+    "model": "apps.Category",
+    "pk": 6,
+    "fields": {
+      "name": "Erkaklar uchun",
+      "icon": "https://img.icons8.com/emoji/40/man-with-beard-light-skin-tone.png"
+    }
+  },
+  {
+    "model": "apps.Category",
+    "pk": 7,
+    "fields": {
+      "name": "Fitnes",
+      "icon": "https://img.icons8.com/external-smashingstocks-outline-color-smashing-stocks/40/external-gym-games-smashingstocks-outline-color-smashing-stocks.png"
+    }
+  },
+  {
+    "model": "apps.Category",
+    "pk": 8,
+    "fields": {
+      "name": "Davolovchi mazlar",
+      "icon": "https://img.icons8.com/external-wanicon-two-tone-wanicon/40/external-grinding-laboratory-wanicon-two-tone-wanicon.png"
+    }
+  },
+  {
+    "model": "apps.Category",
+    "pk": 9,
+    "fields": {
+      "name": "Mashina uchun",
+      "icon": "https://img.icons8.com/stickers/40/tesla-model-x.png"
+    }
+  },
+  {
+    "model": "apps.Category",
+    "pk": 10,
+    "fields": {
+      "name": "Kitoblar",
+      "icon": "https://img.icons8.com/dusk/40/book-shelf.png"
+    }
+  },
+  {
+    "model": "apps.Category",
+    "pk": 11,
+    "fields": {
+      "name": "Aqilli soatlar",
+      "icon": "https://img.icons8.com/officel/40/apple-watch-apps.png"
+    }
+  },
+  {
+    "model": "apps.Category",
+    "pk": 12,
+    "fields": {
+      "name": "Atir",
+      "icon": "https://img.icons8.com/external-flaticons-lineal-color-flat-icons/40/external-perfume-skincare-flaticons-lineal-color-flat-icons.png"
+    }
+  },
+  {
+    "model": "apps.Category",
+    "pk": 13,
+    "fields": {
+      "name": "Yangi yil mahsulotlar",
+      "icon": "https://img.icons8.com/3d-fluency/40/christmas-tree.png"
+    }
+  },
+  {
+    "model": "apps.Category",
+    "pk": 14,
+    "fields": {
+      "name": "Eliktronika",
+      "icon": "https://img.icons8.com/external-others-cattaleeya-thongsriphong/40/external-electronic-electronic-device-blue-others-cattaleeya-thongsriphong-3.png"
+    }
+  }
+]

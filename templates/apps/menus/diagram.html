@@ -1,0 +1,58 @@
+{% extends 'apps/base/include.html' %}
+
+{% block body %}
+<div class="content">
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Diagramma uchun konteyner -->
+    <div style="width: 80%; margin: 0 auto;">
+        <canvas id="populationChart"></canvas>
+    </div>
+
+    <!-- JavaScript kod -->
+    <script>
+        const ctx = document.getElementById('populationChart').getContext('2d');
+        const populationChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: {{ population_data.labels|safe }},
+                datasets: [{
+                    label: 'Aholi soni (ming kishi)',
+                    data: {{ population_data.values|safe }},
+                    backgroundColor: {{ population_data.background_colors|safe }},
+                    borderColor: {{ population_data.border_colors|safe }},
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Aholi soni (ming kishi)'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Viloyatlar'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    },
+                    title: {
+                        display: true,
+                        text: 'O‘zbekiston viloyatlari bo‘yicha aholi soni (2025)'
+                    }
+                }
+            }
+        });
+    </script>
+</div>
+{% endblock %}
